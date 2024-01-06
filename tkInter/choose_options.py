@@ -15,12 +15,23 @@ def create_sia416_folder():
 
     return sia416_folder
 
-def extract_and_export_data(selected_option, export_format, sia416_folder, entry_projekt_name, entry_datei_name):
-    # Simuliere Datenextraktion aus einer anderen Quelle (z. B. einem anderen Code)
-    data = {"Projekt": ["Projekt1", "Projekt2", "Projekt3"],
-            "Wert": [10, 15, 20]}
+def _create_df(room_list):
+    col_lst = []
+    col_lst.append("guid")
+    col_lst.append("category")
+    col_lst.append("name")
+    col_lst.append("story")
+    col_lst.append("site")
+    col_lst.append("area")
+    col_lst.append("volume")
 
-    df = pd.DataFrame(data)
+    df = pd.DataFrame([room for room in room_list], columns = col_lst)
+    return df   
+
+
+def extract_and_export_data(selected_option, export_format, sia416_folder, entry_projekt_name, entry_datei_name, room_list):
+    # Simuliere Datenextraktion aus einer anderen Quelle (z. B. einem anderen Code)
+    df = _create_df(room_list)
 
     if selected_option == "Zusammengefasst":
         result_df = df.head(1)
@@ -56,10 +67,10 @@ def export_to_excel(dataframe, sia416_folder, projekt_name, datei_name):
 
     print(f"Daten in Excel exportiert: {excel_path}")
 
-def main():
+def main(root, room_list):
     sia416_folder = create_sia416_folder()
 
-    root = tk.Tk()
+    #root = tk.Tk()
     root.title("Datenoptionen auswählen und exportieren")
 
     # Label für Projektname
@@ -100,7 +111,7 @@ def main():
     option_menu_data_extraction = tk.OptionMenu(root, selected_data_extraction, *options_data_extraction)
     option_menu_data_extraction.pack(pady=10)
 
-    btn_extract_rows = tk.Button(root, text="Auswerten", command=lambda: extract_and_export_data(selected_data_extraction.get(), selected_export_format.get(), sia416_folder, entry_projekt_name, entry_datei_name))
+    btn_extract_rows = tk.Button(root, text="Auswerten", command=lambda: extract_and_export_data(selected_data_extraction.get(), selected_export_format.get(), sia416_folder, entry_projekt_name, entry_datei_name, room_list))
     btn_extract_rows.pack(pady=10)
 
     root.mainloop()

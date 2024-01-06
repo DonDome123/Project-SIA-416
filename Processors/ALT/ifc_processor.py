@@ -6,7 +6,7 @@ import ifcopenshell.util.element
 from ifcopenshell.util.selector import Selector
 
 import os
-import Helpers.Data_Helpers as hlp
+import Processors.Data_Helpers as hlp
 
 #Globale Variablen - Listen
 

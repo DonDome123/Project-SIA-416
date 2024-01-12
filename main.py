@@ -1,13 +1,8 @@
-import Processors.config_processor as conf_pro
-import Processors.ALT.ifc_processor as ifc_p
-import Processors.export_processor as exp_p
 import tkinter as tk
-from tkinter import ttk, filedialog
+from tkinter import filedialog
 
 from tkInter.choose_ifc import open_ifc_file as open_ifc_file
 from tkInter.choose_ifc import get_rooms
-from Processors.export_processor import export_data
-from tkInter.choose_options import main as choose_options_main
 import collections
 import openpyxl
 
@@ -45,9 +40,11 @@ def main():
         if not file_path:
             return
         open_ifc_file(file_path, text_output)
-        btn_open.destroy()  # Remove the "Choose IFC File" button
         global glb_rooms
         glb_rooms = get_rooms()
+        if len(glb_rooms) == 0:
+            return
+        btn_open.destroy()  # Remove the "Choose IFC File" button
         options = ["Niedrig", "Mittel", "Hoch"]  # Liste der Optionen, die du anzeigen möchtest
         selected_option = tk.StringVar()
         selected_option.set(options[0])  # Standardmäßig die erste Option auswählen
@@ -61,14 +58,14 @@ def main():
     def calculate_prices(ausbaustandard):
         prices = {
             "area": {
-                "niedrig": 5,
-                "mittel": 10,
-                "hoch": 15
+                "niedrig": 1800,
+                "mittel": 2000,
+                "hoch": 2200
             },
             "volume": {
-                "niedrig": 5,
-                "mittel": 10,
-                "hoch": 15
+                "niedrig": 600,
+                "mittel": 800,
+                "hoch": 1000
             }
         }
         category_totals = calculate_category_totals(glb_rooms)
@@ -77,28 +74,23 @@ def main():
 # Richtige Zellen angeben
         ziel_excel = openpyxl.load_workbook("HS23_SCRIPT_SIA416_Flaechen.xlsx")
         ziel_arbeitsblatt = ziel_excel["Tabelle1"]
-        cells = ["A9", "A15", "B15", "C13", "D13", "A25", "B25"]
-        values = [category_totals["area"][value] for value in ("GF", "HNF", "NNF", "VF", "FF")]
-        values.extend([price_area, price_volume])
+        cells = ["A9", "A15", "B15", "C13", "D13", "A24", "A25", "B25", "B24"] 
+        values = [category_totals["area"][value] for value in ("GF", "HNF", "NNF", "VF", "FF", "GF")]
+        print(category_totals)
+        values.extend([price_area, price_volume, category_totals["volume"]["GF"]])
         for cell, value in zip(cells, values):
             ziel_arbeitsblatt[cell].value = round(value, 3)
 
-        file_path = filedialog.asksaveasfilename(filetypes=[("Excel", "*.xlsx"), ("PDF", "*.pdf")])
+        file_path = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Excel", "*.xlsx")])
         
         if file_path:
             ziel_excel.save(file_path)
             ziel_excel.close()
-
-
-            
-    
-    def export_to_excel():
-        global glb_rooms
-        exp_p.export_data(glb_rooms)
+            root.quit()
 
     root = tk.Tk()
-    root.title("IFC Elemente pro Stock")
-    btn_open = tk.Button(root, text="Choose IFC File", command=get_ifc)
+    root.title("SIA 416 Auszug")
+    btn_open = tk.Button(root, text="Wähle IFC Datei", command=get_ifc)
     btn_open.pack(pady=50)
 
 

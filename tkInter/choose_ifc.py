@@ -10,27 +10,17 @@ def open_ifc_file(file_path, text_output):
     global ifc_file
     global room_list
 
-    if file_path:
-        ifc_file = ifcopenshell.open(file_path)
-        list_elements_per_storey(text_output)
-        room_list = read_source_ifc(file_path)
-        for i, room in enumerate(room_list):
-            missing = ",".join([key for key, val in room.items() if val is None])
-            print(f"Room {i} is missing: {missing}")
-            text_output.insert(tk.END, f"Room {i} is missing: {missing}")
-        #print(room_list)
+    ifc_file = ifcopenshell.open(file_path)
+    list_elements_per_storey(text_output)
+    room_list = read_source_ifc(file_path)
+    for i, room in enumerate(room_list):
+        missing = ",".join([key for key, val in room.items() if val is None])
+        if missing != "":
+            text_output.insert(tk.END, f"Room {i} is missing: {missing}\n")
+    if missing != "":
+        room_list = []
         return
-    
-    file_path = filedialog.askopenfilename(filetypes=[("IFC files", "*.ifc")])
-    if file_path:
-        ifc_file = ifcopenshell.open(file_path)
-        list_elements_per_storey(text_output)
-        room_list = read_source_ifc(file_path)
-        #print(room_list)
-    else:
-        ifc_file = None
-        text_output.delete(1.0, tk.END)
-        text_output.insert(tk.END, "No file chosen")
+    text_output.insert(tk.END, "")
 
 def list_elements_per_storey(text_output):
     if not ifc_file:

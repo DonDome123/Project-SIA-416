@@ -13,25 +13,27 @@ def read_source_ifc(source_path):
     room_list = []
 
     for room in spaces:
-        values =ifcopenshell.util.element.get_psets(room, qtos_only=True)
-        name = room.get_info()["LongName"]
-        site = getBuilding(room)
-        story = getStorey(room)
-        guid = room.get_info()["GlobalId"]
-        area = values["BaseQuantities"]["NetFloorArea"]
-        volume = values["BaseQuantities"]["GrossVolume"]
-        values =ifcopenshell.util.element.get_psets(room)
-        category = values["Pset_SpaceCommon"]["Category"]
         room_info = {
-            "name": name,
-            "site": site,
-            "story": story,
-            "guid": guid,
-            "area": area,
-            "volume": volume,
-            "category": category
+            "name": None,
+            "site": None,
+            "story": None,
+            "guid": None,
+            "area": None,
+            "volume": None,
+            "category": None
         }
+
+        values =ifcopenshell.util.element.get_psets(room)
+        room_info["name"] = room.get_info().get("LongName", None)
+        room_info["guid"] = room.get_info().get("GlobalId", None)
+        room_info["site"] = getBuilding(room)
+        room_info["story"] = getStorey(room)
+        room_info["area"] = values["BaseQuantities"].get("NetFloorArea", None)
+        room_info["volume"] = values["BaseQuantities"].get("GrossVolume", None)
+        room_info["category"] = values["Pset_SpaceCommon"].get("Category", None)
+
         room_list.append(room_info)
+
 
     return room_list
 

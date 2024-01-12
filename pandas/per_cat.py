@@ -28,7 +28,7 @@ def browse_file():
             result_label.config(text=f"{category}: {total_area} square units")
 
         # Create a new DataFrame with the totals
-        totals_df = pd.DataFrame(list(category_totals.items()), columns=["category", "total area"])
+        totals_df = pd.DataFrame(list(category_totals.items()), columns=["category", "area"])
 
         # Export the totals to a new Excel file
         save_path = filedialog.asksaveasfilename(defaultextension=".xlsx", filetypes=[("Excel files", "*.xlsx")])

@@ -14,6 +14,10 @@ def open_ifc_file(file_path, text_output):
         ifc_file = ifcopenshell.open(file_path)
         list_elements_per_storey(text_output)
         room_list = read_source_ifc(file_path)
+        for i, room in enumerate(room_list):
+            missing = ",".join([key for key, val in room.items() if val is None])
+            print(f"Room {i} is missing: {missing}")
+            text_output.insert(tk.END, f"Room {i} is missing: {missing}")
         #print(room_list)
         return
     

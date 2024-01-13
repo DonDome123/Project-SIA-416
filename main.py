@@ -94,7 +94,7 @@ def main():
     btn_open.pack(pady=50)
 
 
-    text_output = tk.Text(root, width=40, height=10, bg = 'red')
+    text_output = tk.Text(root, width=40, height=10, bg='gray',)
     text_output.pack()
     
     

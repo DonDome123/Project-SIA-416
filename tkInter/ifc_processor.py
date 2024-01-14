@@ -1,4 +1,3 @@
-# ifc_importer.py
 import ifcopenshell
 
 def read_source_ifc(source_path):
@@ -34,7 +33,6 @@ def read_source_ifc(source_path):
 
         room_list.append(room_info)
 
-
     return room_list
 
 def getStorey(ele):
@@ -62,7 +60,6 @@ def getBuilding(ele):
     building_name = building_obj.Name
 
     return building_name
-
 
 if __name__ == "__main__":
     read_source_ifc("./ARC_Modell_NEST_230328.ifc")

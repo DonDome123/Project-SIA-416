@@ -45,7 +45,7 @@ Das collections.defaultdict ist ein Wörterbuch, das einen Standardwert für Key
 
 ## Preisberechnung
 
-Die totale Fläche und das Volumen werden mit bereits im Code festgelegten Preisen multipliziert. Der Anwender muss sich nicht mehr überlegen, welchen Preis er einsetzen soll, er muss lediglich angeben welchen Ausbaustandard er wünscht.
+Die totale Fläche und das Volumen werden mit bereits im Code festgelegten Preisen multipliziert. Der Anwender muss sich nicht mehr überlegen, welchen Preis er einsetzen soll und muss lediglich angeben, welchen Ausbaustandard er wünscht.
 
 ## Potenzial
 

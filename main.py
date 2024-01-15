@@ -56,12 +56,12 @@ def main():
     def calculate_prices(ausbaustandard, price_type):
         prices = {
             "m2": {
-                "niedrig": 1800,
-                "mittel": 2000,
-                "hoch": 2200
+                "niedrig": 2300,
+                "mittel": 3000,
+                "hoch": 3700
             },
             "m3": {
-                "niedrig": 600,
+                "niedrig": 650,
                 "mittel": 800,
                 "hoch": 1000
             }

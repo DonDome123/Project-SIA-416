@@ -1,6 +1,6 @@
 # Project SIA 416
 
-Mit dem vorliegenden Code kann der Benutzer durch sechs Klicks aus einer IFC Datei ein SIA416 Auszug mit einer Grobkostenschätzung in einer Excel Datei generieren. Dabei müssen in der IFC Datei lediglich die Räume vorhanden und dessen Raumkategorie definiert sein. Neben den definierten Nettogeschossflächen müssen die Geschossflächen ebenfalls als Raum gezeichnet sein.
+Mit dem vorliegenden Code kann der Benutzer durch sechs Klicks aus einer IFC Datei ein SIA416 Auszug mit einer Grobkostenschätzung in einer Excel Datei generieren. Dabei müssen in der IFC Datei lediglich die Räume vorhanden und dessen Raumkategorie definiert sein. Neben den definierten Nettogeschossflächen müssen die Geschossflächen ebenfalls als Raum gezeichnet und die lichte Raumhöhe bzw. die Geschosshöhe muss Richtig eingestellt sein (Volumenberechnung).
 
 ## Module
 

@@ -51,4 +51,7 @@ Die totale Fläche und das Volumen werden mit bereits im Code festgelegten Preis
 
 Das Skript könnte man wie folgt weiterentwickeln:
 - Aktuelle Preislisten verknüpfen
+- Möglichkeit zum Einsetzen eigener Erfahrungswerte
+- Berechnung der Konstruktionsfläche KF mittels Additionsverfahren
 - Ausgabe als PDF
+- User Interface mit Custom TkInter oder Website
